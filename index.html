@@ -8,15 +8,22 @@
 </head>
 <body>
     <main>
-        <h1>Pikachu</h1>
-        <img src="" alt="">
+        <h1 id="pokemon">Pikachu</h1>
+        <img id="image" src="" alt="">
     </main>
     <script>
         async function getPokemon (id) {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon/{id}/')
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
             const data = await response.json()
             return data
         }
+
+        async function init () {
+            const firstPokemon = await getPokemon(150)
+            window.pokemon.textContent = firstPokemon.name
+            window.image.setAttribute('src', firstPokemon.sprites.front_default)
+        }
+        init()
     </script>
 </body>
 </html>
